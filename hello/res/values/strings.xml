@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">hello</string>
+    <string name="hello">Hello world!</string>
+    <string name="action_settings">Settings</string>
+    <string name="detail">Detail</string>
+    <string name="nodata">Sorry NoData</string>
+    <string name="textDetail">ここはTourの詳細情報が表示されるよ</string>
+    <string name="button02_label">レビューを書く</string>
+    <string name="subText">とりあえずtmp</string>
+    <string name="tourTitle">涼宮ハルヒツアー！</string>
+    <string name="sendButton">送信</string>
+    <string name="cancel">キャンセル</string>
+    <string name="review_star5">5段階評価</string>
+    <string name="back">戻る</string>
+
+</resources>
