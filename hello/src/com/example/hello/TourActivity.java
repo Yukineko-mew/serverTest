@@ -39,7 +39,7 @@ public class TourActivity extends Activity {
 		adapter = new ArrayAdapter<String>(this,
 				android.R.layout.simple_expandable_list_item_1);
 		
-		// --- ƒŒƒrƒ…[ƒtƒH[ƒ€‚Ö‚Ì‘JˆÚƒ{ƒ^ƒ“ ---///
+		// --- ï¿½ï¿½ï¿½rï¿½ï¿½ï¿½[ï¿½tï¿½Hï¿½[ï¿½ï¿½ï¿½Ö‚Ì‘Jï¿½Úƒ{ï¿½^ï¿½ï¿½ ---///
 		Button btn = (Button) findViewById(R.id.reviewTransition);
 		btn.setOnClickListener(new View.OnClickListener() {
 			@Override
@@ -51,7 +51,7 @@ public class TourActivity extends Activity {
 		});
 		;
 
-		// --- –ß‚éƒ{ƒ^ƒ“ ---//
+		// --- ï¿½ß‚ï¿½{ï¿½^ï¿½ï¿½ ---//
 		Button back = (Button) findViewById(R.id.backButton);
 		back.setOnClickListener(new View.OnClickListener() {
 			@Override
@@ -73,61 +73,61 @@ public class TourActivity extends Activity {
 		// }
 	}
 
-	@Override
-	public void onResume() {
-		super.onResume();
-		try {
-			URL cjURL = new URL("hogehogehogehoge");
-			URLConnection con = cjURL.openConnection();
-			con.setDoOutput(true);
-			
-			InputStreamReader isr = new InputStreamReader(con.getInputStream());
-			BufferedReader br = new BufferedReader(isr);
-			// ‚Ps‚¸‚Â‘‚«o‚·
-			
-			JSONObject jsonResponse = new JSONObject(br.readLine());
-			JSONArray data = jsonResponse.getJSONArray("cj");
-
-			// ˆêŒÂ–Ú‚ğæ“¾
-			for(int i=0; i<data.length(); i++ ) {
-				JSONObject c = data.getJSONObject(i);
-				adapter.add("rating:"+c.getString("rating")+", detail:"+c.getString("detail"));
-				Log.d("JOSN("+i+")","rating:"+c.getString("rating")+", detail:"+c.getString("detail"));
-			}
-			br.close();
-			isr.close();
-			
-			reviewList.setAdapter(adapter);
-		} catch (JSONException e) {
-			// TODO Auto-generated catch block
-			Log.d("e1", "JSONException");
-			e.printStackTrace();
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			Log.d("e2", "IOException");
-			e.printStackTrace();
-		}
-
-	}
+//	@Override
+//	public void onResume() {
+//		super.onResume();
+//		try {
+//			URL cjURL = new URL("http://rhyth.dip.jp/213test_post.php");
+//			URLConnection con = cjURL.openConnection();
+//			con.setDoOutput(true);
+//			
+//			InputStreamReader isr = new InputStreamReader(con.getInputStream());
+//			BufferedReader br = new BufferedReader(isr);
+//			// ï¿½Pï¿½sï¿½ï¿½ï¿½Âï¿½ï¿½ï¿½ï¿½oï¿½ï¿½
+//			
+//			JSONObject jsonResponse = new JSONObject(br.readLine());
+//			JSONArray data = jsonResponse.getJSONArray("cj");
+//
+//			// ï¿½ï¿½Â–Ú‚ï¿½ï¿½æ“¾
+//			for(int i=0; i<data.length(); i++ ) {
+//				JSONObject c = data.getJSONObject(i);
+//				adapter.add("rating:"+c.getString("rating")+", detail:"+c.getString("detail"));
+//				Log.d("JOSN("+i+")","rating:"+c.getString("rating")+", detail:"+c.getString("detail"));
+//			}
+//			br.close();
+//			isr.close();
+//			
+//			reviewList.setAdapter(adapter);
+//		} catch (JSONException e) {
+//			// TODO Auto-generated catch block
+//			Log.d("e1", "JSONException");
+//			e.printStackTrace();
+//		} catch (IOException e) {
+//			// TODO Auto-generated catch block
+//			Log.d("e2", "IOException");
+//			e.printStackTrace();
+//		}
+//
+//	}
 	
-	private void json_parse(String jsondata) {
-
-		try {
-			JSONObject jsonResponse = new JSONObject(jsondata);
-
-			JSONArray data = jsonResponse.getJSONArray("cj");
-
-			for (int i = 0; i < data.length(); i++) {
-
-				JSONObject c = data.getJSONObject(i);
-
-				Log.d("rating", c.getString("rating"));
-				Log.d("detail", c.getString("detail"));
-			}
-		} catch (JSONException e) {
-
-			e.printStackTrace();
-		}
-
-	}
+//	private void json_parse(String jsondata) {
+//
+//		try {
+//			JSONObject jsonResponse = new JSONObject(jsondata);
+//
+//			JSONArray data = jsonResponse.getJSONArray("cj");
+//
+//			for (int i = 0; i < data.length(); i++) {
+//
+//				JSONObject c = data.getJSONObject(i);
+//
+//				Log.d("rating", c.getString("rating"));
+//				Log.d("detail", c.getString("detail"));
+//			}
+//		} catch (JSONException e) {
+//
+//			e.printStackTrace();
+//		}
+//
+//	}
 }
