@@ -77,7 +77,7 @@ public class TourActivity extends Activity {
 	public void onResume() {
 		super.onResume();
 		try {
-			URL cjURL = new URL("hogehogehogehoge");
+			URL cjURL = new URL("http://rhyth.dip.jp/213test_post.php");
 			URLConnection con = cjURL.openConnection();
 			con.setDoOutput(true);
 			

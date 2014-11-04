@@ -52,7 +52,7 @@ public class ReviewActivity extends Activity{
 				//JSONå`éÆÇ≈ÇÃï€ë∂èàóù
 				
 				HttpClient httpClient = new DefaultHttpClient();
-				HttpPost httpPost = new HttpPost("hogehogehogehoge");
+				HttpPost httpPost = new HttpPost("http://rhyth.dip.jp/213test_get.php");
 
 				JSONObject json = new JSONObject();
 				try {
