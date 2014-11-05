@@ -32,24 +32,28 @@ import android.widget.EditText;
 import android.widget.RatingBar;
 
 public class ReviewActivity extends Activity{
+	
+	private Activity reviewActivity;
+
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.review);
+		reviewActivity = this;
 
 		Button send = (Button) findViewById(R.id.sendButton);
 		send.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
 				String body="";
-				//--- ƒcƒA[ƒŒƒrƒ…[•Û‘¶ˆ— ---//
+				//--- ï¿½cï¿½Aï¿½[ï¿½ï¿½ï¿½rï¿½ï¿½ï¿½[ï¿½Û‘ï¿½ï¿½ï¿½ï¿½ï¿½ ---//
 				RatingBar rb = (RatingBar) findViewById(R.id.ratingBar);
-				float f = rb.getRating(); // 5’iŠK•]‰¿æ“¾
+				float f = rb.getRating(); // 5ï¿½iï¿½Kï¿½]ï¿½ï¿½ï¿½æ“¾
 				
 				EditText detail = (EditText) findViewById(R.id.reviewDetail);
-				String s = detail.getText().toString(); // Ú×ƒeƒLƒXƒgæ“¾
+				String s = detail.getText().toString(); // ï¿½Ú×ƒeï¿½Lï¿½Xï¿½gï¿½æ“¾
 				
-				//JSONŒ`®‚Å‚Ì•Û‘¶ˆ—
+				//JSONï¿½`ï¿½ï¿½ï¿½Å‚Ì•Û‘ï¿½ï¿½ï¿½ï¿½ï¿½
 				
 				HttpClient httpClient = new DefaultHttpClient();
 				HttpPost httpPost = new HttpPost("http://rhyth.dip.jp/213test_get.php");
@@ -58,48 +62,13 @@ public class ReviewActivity extends Activity{
 				try {
 					json.accumulate("rating",(double)f);
 					json.accumulate("detail",s);
-					Log.d("CREATE_JSON", json.toString());
 				} catch (JSONException e) {
 					// TODO Auto-generated catch block
-					Log.d("CREATE_ERR_JSON", e.toString());
 					e.printStackTrace();
 				}
 				
-				try {
-					StringEntity se = new StringEntity(json.toString(), "UTF-8");
-					
-					httpPost.setEntity(se);
-					httpPost.setHeader("Accept", "application/json");
-					httpPost.setHeader("Content-type", "application/json");
-					Log.d("Ready", "SUCCESS the dataset.");
-					try {
-						Log.d("GO!!!!!", "startHTTP Response");
-						HttpResponse httpResponse = httpClient.execute(httpPost);
-						Log.d("Finish!!!!", "finish the response");
-
-						InputStream inputStream = httpResponse.getEntity().getContent();
-												
-			            if(inputStream != null)
-			                Log.d("RESPONSE", convertInputStreamToString(inputStream));
-			            else
-			            	Log.d("RE_SUCCESS", json.toString());
-					} catch (ClientProtocolException e) {
-						// TODO Auto-generated catch block
-						Log.d("ClientProtocol", e.toString());
-						e.printStackTrace();
-					} catch (IOException e) {
-						// TODO Auto-generated catch block
-						Log.d("IOException", e.toString());
-						e.printStackTrace();
-					}
-			
-				} catch (UnsupportedEncodingException e) {
-					// TODO Auto-generated catch block
-					Log.d("UnsupportEncodingError", e.toString());
-					e.printStackTrace();
-				}
-
-	            finish();
+				PostJsonTask pjt = new PostJsonTask(reviewActivity);
+				pjt.execute(json.toString());
 			}
 		});;
 		
@@ -110,17 +79,5 @@ public class ReviewActivity extends Activity{
 				finish();
 			}
 		});;
-	}
-	
-	private static String convertInputStreamToString(InputStream inputStream) throws IOException{
-	    BufferedReader bufferedReader = new BufferedReader( new InputStreamReader(inputStream));
-	    String line = "";
-	    String result = "";
-	    while((line = bufferedReader.readLine()) != null)
-	        result += line;
-
-	    inputStream.close();
-	    return result;
-
 	}
 }

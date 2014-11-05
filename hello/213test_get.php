@@ -1,22 +1,22 @@
 <?php
 
-$jsonInput = file_get_contents('php://input');
+$jsonInput = $_POST('jsonQuery');
 $json = json_decode($jsonInput);
 
 $link = mysql_connect('localhost', 'b1012213', 'b1012213');
 
 if(!$link) {
-        die('Ú‘±¸”s‚Å‚·B'.mysql_error());
+        die('ï¿½Ú‘ï¿½ï¿½ï¿½ï¿½sï¿½Å‚ï¿½ï¿½B'.mysql_error());
 }
 
 $db_selected = mysql_select_db('213test', $link);
 if(!$db_selected) {
-        die('ƒf[ƒ^ƒx[ƒX‘I‘ğ¸”s‚Å‚·B'.mysql_error());
+        die('ï¿½fï¿½[ï¿½^ï¿½xï¿½[ï¿½Xï¿½Iï¿½ï¿½ï¿½ï¿½ï¿½sï¿½Å‚ï¿½ï¿½B'.mysql_error());
 }
 
 $result = mysql_query('SELECT rating,detail FROM review');
 if(!$result) {
-        die('ƒNƒGƒŠ‚ª¸”s‚µ‚Ü‚µ‚½B'.mysql_error());
+        die('ï¿½Nï¿½Gï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½sï¿½ï¿½ï¿½Ü‚ï¿½ï¿½ï¿½ï¿½B'.mysql_error());
 }
 
 $rating = $json->{'rating'};
@@ -28,7 +28,7 @@ print($detail);
 $insert_flag = mysql_query("INSERT INTO review(rating, detail) VALUES($rating, $detail)");
 
 if(!$insert_flag) {
-        die('INSERTƒNƒGƒŠ¸”sB'.mysql_error());
+        die('INSERTï¿½Nï¿½Gï¿½ï¿½ï¿½ï¿½ï¿½sï¿½B'.mysql_error());
 }
 
 mysql_close($link);
